@@ -13,9 +13,6 @@ const shopHolderSchema = new mongoose.Schema({
     fatherName: {
         type: String
     },
-    husbandName: {
-        type: String
-    },
     DOB: {
         type: Date
     },
