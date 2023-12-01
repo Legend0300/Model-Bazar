@@ -8,7 +8,12 @@ const zoneSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: false
-    }
+    },
+    city:
+        {
+            type: [ mongoose.Schema.Types.ObjectId],
+            ref: 'City'
+        }
 });
 
 const Zone = mongoose.model('Zone', zoneSchema);
