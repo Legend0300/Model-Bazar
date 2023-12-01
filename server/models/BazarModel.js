@@ -10,27 +10,32 @@ const BazarSchema = new mongoose.Schema({
         required: true
     },
     city: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'City'
     },
+    zone: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Zone'
+    },
+
     active: {
         type: Boolean,
         default: false
     },
+    //we can use this to store the shops in the bazar
+    //we only need StoreType to create a shop in bazar form
+    approvedShops: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Shop'
+    }],
     baseRentPermanent: {
         type: Number,
         required: true
     },
-    numberOfPermanentShops: {
-        type: Number,
-        required: true
-    },
-    baseRentTemporary: {
-        type: Number,
-        required: true
-    },
-    numberOfTemporaryShops: {
-        type: Number,
+    prefix: {
+        type: String,
         required: true
     },
     image: {
@@ -41,6 +46,10 @@ const BazarSchema = new mongoose.Schema({
         ref: 'User'
     },
     bazarManager: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    supervisor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }

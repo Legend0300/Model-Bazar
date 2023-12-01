@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// Define Stall Category Schema
-const stallCategorySchema = new mongoose.Schema({
+// Define Shop Category Schema
+const shopCategorySchema = new mongoose.Schema({
     edible: {
         type: Boolean,
         required: true
@@ -30,6 +30,10 @@ const incomeCategorySchema = new mongoose.Schema({
 
 // Define Shop Schema
 const shopSchema = new mongoose.Schema({
+    shopID: {
+        type: String,
+        required: true
+    },
     stallCategory: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'StallCategory',
@@ -42,7 +46,20 @@ const shopSchema = new mongoose.Schema({
     incomeCategory: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'IncomeCategory',
-    }
+    },
+    valant : {
+        type: Boolean,
+        default: true
+    },
+    bazar: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bazar',
+        required: true
+    },
+    size: {
+        type: String,
+        required: true
+    },
 });
 
 // Define models

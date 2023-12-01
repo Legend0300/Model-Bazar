@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const citySchema = new mongoose.Schema({
-    province: {
+
+    name: {
         type: String,
         required: true
     },
@@ -9,13 +10,9 @@ const citySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    name: {
+    province: {
         type: String,
         required: true
-    },
-    zone : {
-        type:  mongoose.Schema.Types.ObjectId,
-        ref: 'Zone'
     },
     prefix: {
         type: String,
