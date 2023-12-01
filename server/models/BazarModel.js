@@ -34,14 +34,6 @@ const BazarSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    tempShops: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Shop'
-    }],
-    baseRentTemporary: {
-        type: Number,
-        required: true
-    },
     image: {
         type: String
     },
@@ -51,7 +43,13 @@ const BazarSchema = new mongoose.Schema({
     },
     bazarManager: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
+    },
+    supervisor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 
