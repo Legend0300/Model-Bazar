@@ -14,6 +14,12 @@ const BazarSchema = new mongoose.Schema({
         required: true,
         ref: 'City'
     },
+    zone: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Zone'
+    },
+
     active: {
         type: Boolean,
         default: false
