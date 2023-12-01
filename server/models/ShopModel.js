@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// Define Stall Category Schema
-const stallCategorySchema = new mongoose.Schema({
+// Define Shop Category Schema
+const shopCategorySchema = new mongoose.Schema({
     edible: {
         type: Boolean,
         required: true
@@ -30,11 +30,7 @@ const incomeCategorySchema = new mongoose.Schema({
 
 // Define Shop Schema
 const shopSchema = new mongoose.Schema({
-    stallID: {
-        type: String,
-        required: true
-    },
-    stallCode: {
+    shopID: {
         type: String,
         required: true
     },
@@ -62,7 +58,6 @@ const shopSchema = new mongoose.Schema({
     },
     size: {
         type: String,
-        enum: ['4*5', '10*10'],
         required: true
     },
 });
