@@ -26,12 +26,16 @@ const BazarSchema = new mongoose.Schema({
     },
     //we can use this to store the shops in the bazar
     //we only need StoreType to create a shop in bazar form
-    permShops: [{
+    approvedShops: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Shop'
     }],
     baseRentPermanent: {
         type: Number,
+        required: true
+    },
+    prefix: {
+        type: String,
         required: true
     },
     image: {
@@ -43,13 +47,11 @@ const BazarSchema = new mongoose.Schema({
     },
     bazarManager: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     },
     supervisor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     }
 });
 
