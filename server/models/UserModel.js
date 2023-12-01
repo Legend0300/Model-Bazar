@@ -20,12 +20,12 @@ const userSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['disabled', 'not active', 'active'],
-        default: 'not active'
+        enum: ['disabled', 'inactive', 'active'],
+        default: 'inactive'
     },
     userType: {
         type: String,
-        enum: ['SuperAdmin', 'Admin', 'Zone Manager', 'Supervisor', 'Bazar Manager'],
+        enum: ['SuperAdmin', 'Admin', 'ZoneManager','BazarManager','Supervisor'],
         required: true
     }
 });
