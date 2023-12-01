@@ -14,10 +14,6 @@ const citySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    zone : {
-        type:  mongoose.Schema.Types.ObjectId,
-        ref: 'Zone'
-    },
     prefix: {
         type: String,
         required: true
