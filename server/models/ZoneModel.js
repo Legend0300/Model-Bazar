@@ -13,7 +13,11 @@ const zoneSchema = new mongoose.Schema({
         {
             type: [ mongoose.Schema.Types.ObjectId],
             ref: 'City'
-        }
+        },
+    zoneManager: {
+        type: moongose.schemas.ObjectId,
+        required: true
+    }
 });
 
 const Zone = mongoose.model('Zone', zoneSchema);
