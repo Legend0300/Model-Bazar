@@ -3,8 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 // const superadminRoutes = require('./routes/superadmin');
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
+const bazarRoutes = require('./routes/bazarRoutes');
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express.json());
 // Define your routes here
 app.use('/users', userRoutes);
 app.use('/zones', zoneRoutes);
+app.use('/bazars', bazarRoutes);
 
 
 app.route('/').get((req, res) => {
