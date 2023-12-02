@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 // const superadminRoutes = require('./routes/superadmin');
 const userRoutes = require('./routes/userRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
+const connect = require('./config/dbConnection');
 const bazarRoutes = require('./routes/bazarRoutes');
 const cityRoutes = require('./routes/cityRoutes');
 
@@ -19,6 +20,8 @@ const PORT = process.env.PORT || 3000;
 // const db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // db.once('open', () => console.log('Connected to MongoDB'));
+
+// connect();
 
 app.use(express.json());
 
