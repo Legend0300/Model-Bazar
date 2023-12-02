@@ -15,7 +15,8 @@ const zoneSchema = new mongoose.Schema({
             ref: 'City'
         },
     zoneManager: {
-        type: moongose.schemas.ObjectId,
+        type: [ mongoose.Schema.Types.ObjectId],
+        ref: 'User',
         required: true
     }
 });
