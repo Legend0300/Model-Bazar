@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
 const bazarRoutes = require('./routes/bazarRoutes');
+const cityRoutes = require('./routes/cityRoutes');
 
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/zones', zoneRoutes);
 app.use('/bazars', bazarRoutes);
+app.use('/cities', cityRoutes);
 
 
 app.route('/').get((req, res) => {
