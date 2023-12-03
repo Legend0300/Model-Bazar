@@ -1,0 +1,18 @@
+{
+  "cities": [
+    {
+      "name": "islamabad lund",
+      "district": "islamabad",
+      "province": "islamabad capital territory",
+      "prefix": "ISB",
+      "id": 2
+    },
+    {
+      "name": "karachi",
+      "district": "karachi",
+      "province": "sindh",
+      "prefix": "KAR",
+      "id": 3
+    }
+  ]
+}
