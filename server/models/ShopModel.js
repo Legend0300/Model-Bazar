@@ -21,12 +21,6 @@ const shopTypeSchema = new mongoose.Schema({
 });
 
 // Define Income Category Schema
-const incomeCategorySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
-});
 
 // Define Shop Schema
 const shopSchema = new mongoose.Schema({
@@ -43,11 +37,7 @@ const shopSchema = new mongoose.Schema({
         ref: 'ShopType',
         required: true
     },
-    incomeCategory: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'IncomeCategory',
-    },
-    valant : {
+    vacant : {
         type: Boolean,
         default: true
     },
