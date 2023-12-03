@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import CreateUserForm from './Components/User/createUserForm';
+import CityList from './Components/City/cityList';
 function App() {
   return (
     <div className="App">
-    <CreateUserForm/>
+      <CityList/>
     </div>
   );
 }
