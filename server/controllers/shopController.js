@@ -1,5 +1,5 @@
 // Import required modules
-const { Shop } = require('../models/ShopModel');
+const { Shop , ShopType , StallCategory , IncomeCategory } = require('../models/ShopModel');
 
 // Get all shops
 const getAllShops = async (req, res) => {

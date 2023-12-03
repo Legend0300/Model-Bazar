@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const ShopModel = require('../models/ShopModel');
 const { getAllShops , createShop ,getShopByID , editShopByID , deleteShopByID } = require('../controllers/shopController');
 
 // Get all shops

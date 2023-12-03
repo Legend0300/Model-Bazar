@@ -8,7 +8,8 @@ const userRoutes = require('./routes/userRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
 const bazarRoutes = require('./routes/bazarRoutes');
 const cityRoutes = require('./routes/cityRoutes');
-
+const shopRoutes = require('./routes/shopRouters');
+const shopHolderRoutes = require('./routes/shopHolderRoutes');
 
 dotenv.config();
 
@@ -30,7 +31,8 @@ app.use('/users', userRoutes);
 app.use('/zones', zoneRoutes);
 app.use('/bazars', bazarRoutes);
 app.use('/cities', cityRoutes);
-
+app.use('/shops', shopRoutes);
+app.use('/shop-holders', shopHolderRoutes);
 
 app.route('/').get((req, res) => {
   res.send(':(');
