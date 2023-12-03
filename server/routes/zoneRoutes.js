@@ -5,12 +5,12 @@ const { getZones, getZoneById, createZone, deleteZoneById, updateZoneById } = re
 
 router.get('/', getZones);
 
-router.get('/get-zone/:id', getZoneById);
+router.get('/:id', getZoneById);
 
-router.post('/add-zone',  createZone);
+router.post('/',  createZone);
 
-router.delete('/delete-zone/:id', deleteZoneById);
+router.delete('/:id', deleteZoneById);
 
-router.patch('/update-zone/:id', updateZoneById);
+router.patch('/:id', updateZoneById);
 
 module.exports = router;

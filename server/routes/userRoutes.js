@@ -10,13 +10,13 @@ router.post('/test' , middleware(["ahmed" , "abdullah"]) ,(req, res) => {
 
 router.get('/', getUsers)
 
-router.get('/get-user/:id', getUserById);
+router.get('/:id', getUserById);
 
-router.post('/add-user', addUser);
+router.post('/', addUser);
 
-router.delete('/delete-user/:id', deleteUser);
+router.delete('/:id', deleteUser);
 
-router.patch('/update-user/:id', updateUser);
+router.patch('/:id', updateUser);
 
 
 module.exports = router;
