@@ -9,7 +9,7 @@ function App() {
     <CreateUserForm/>
 
     {/* <ViewUser id={1}/> */}
-    {/* <UserList/> */}
+    <UserList/>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 
 import "./createUserFormStyle.css";
+import validateForm from "./validateForm";
 
 const CreateUserForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,8 @@ const CreateUserForm = () => {
     email: "",
     password: "",
     phone: "",
-    userType: "SuperAdmin",
+    status: "inactive",
+    userType: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -36,31 +38,34 @@ const CreateUserForm = () => {
     }));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
+  // const validateForm = () => {
+  //   const newErrors = {};
 
     // Basic validation, you can add more complex validation if needed
-    if (!formData.username.trim()) {
-      newErrors.username = "Username is required";
-    }
+  //   if (!formData.username.trim()) {
+  //     newErrors.username = "Username is required";
+  //   }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    }
+  //   if (!formData.email.trim() || !formData.email.includes('.com')) {
+  //     newErrors.email = "Email is required";
+  //   }
 
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-    }
+  //   if (!formData.password.trim()) {
+  //     newErrors.password = "Password is required";
+  //   }
 
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone is required";
-    }
+  //   if (!formData.phone.trim()) {
+  //     newErrors.phone = "Phone is required";
+  //   }
 
-    setErrors(newErrors);
+  //   if (!formData.userType.trim()) {
+  //     newErrors.userType = "User Type is required";
+  //   }
+  //   setErrors(newErrors);
 
-    // Return true if there are no errors, false otherwise
-    return Object.keys(newErrors).length === 0;
-  };
+  //   // Return true if there are no errors, false otherwise
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
   const renderIcon = (fieldName) => {
     if (formData[fieldName] && !errors[fieldName]) {
@@ -85,7 +90,7 @@ const CreateUserForm = () => {
     e.preventDefault();
 
     // Validate the form before submitting
-    if (validateForm()) {
+    if (validateForm(formData, setErrors)) {
       // Form data is valid, submit the form)
       createUser(formData);
 
@@ -95,7 +100,8 @@ const CreateUserForm = () => {
         email: "",
         password: "",
         phone: "",
-        userType: "SuperAdmin",
+        status: "inactive",
+        userType: "",
       });
     } else {
       console.log("Form contains errors. Please correct them.");
@@ -182,7 +188,9 @@ const CreateUserForm = () => {
             value={formData.userType}
             onChange={handleChange}
             className="select-style"
+
           >
+            <option disabled selected value="">select role</option>
             <option value="SuperAdmin">
               <FaUserShield className="super-admin-icon" /> SuperAdmin
             </option>
@@ -208,5 +216,6 @@ const CreateUserForm = () => {
     </div>
   );
 };
+
 
 export default CreateUserForm;

@@ -20,12 +20,38 @@
     },
     {
       "username": "jotaro",
-      "email": "jojo3@example.com",
+      "email": "jojo3@gmail.com",
       "password": "starplatinum",
-      "phone": "1122334455",
-      "status": "active",
-      "userType": "Supervisor",
+      "phone": "000000000",
+      "userType": "SuperAdmin",
       "id": 3
+    },
+    {
+      "username": "fa22-bcs-091@cuilahore.edu.pk",
+      "email": "texashouse003@gmail.com",
+      "password": "dxfgdfs",
+      "phone": "dfbvdf",
+      "status": "inactive",
+      "userType": "ZoneManager",
+      "id": 4
+    },
+    {
+      "username": "sdfdsg",
+      "email": "texashouse003@gmail.com",
+      "password": "dfgsd",
+      "phone": "dsfg",
+      "status": "inactive",
+      "userType": "Admin",
+      "id": 5
+    },
+    {
+      "username": "zdfbzd",
+      "email": "texashouse003@gmail.com",
+      "password": "cxvbxc",
+      "phone": "zdfzd",
+      "status": "inactive",
+      "userType": "ZoneManager",
+      "id": 6
     }
   ]
 }
