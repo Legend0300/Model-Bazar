@@ -8,6 +8,7 @@ import './city.css';
 const CityList = () => {
   const [cityList, setCityList] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedEditCity, setSelectedEditCity] = useState(null);
   const [isCreateCityOpen, setIsCreateCityOpen] = useState(false);
   const [isEditCityOpen, setIsEditCityOpen] = useState(false);
 
@@ -20,10 +21,8 @@ const CityList = () => {
     setSelectedCity(city);
   };
 
-  const handleEditCity = (city) => {
-    const updatedCityList = cityList.map((c) => (c.id === city.id ? city : c));
-    setCityList(updatedCityList);
-    setIsEditCityOpen(false);
+  const handleEditCity = () => {
+    setIsEditCityOpen(true);
   };
 
   const handleDeleteCity = async (id) => {
@@ -50,7 +49,7 @@ const CityList = () => {
     fetchCities();
   }, []);
 
- return (
+  return (
     <div className="city-container">
       <button onClick={() => setIsCreateCityOpen(true)}>Create City</button>
       {isCreateCityOpen && <CreateCity onCreateCity={handleCreateCity} />}
@@ -59,30 +58,43 @@ const CityList = () => {
         <ViewCity
           city={selectedCity}
           onClose={() => setSelectedCity(null)}
-          onEdit={() => setIsEditCityOpen(true)}
+          onEdit={handleEditCity}
           onDelete={() => handleDeleteCity(selectedCity.id)}
         />
       )}
 
       {isEditCityOpen && (
         <EditCity
-          city={selectedCity}
-          onEditCity={handleEditCity}
+          city={selectedEditCity}
+          onEditCity={(updatedCity) => {
+            const updatedCityList = cityList.map((c) => (c.id === updatedCity.id ? updatedCity : c));
+            setCityList(updatedCityList);
+            setIsEditCityOpen(false);
+          }}
           onClose={() => setIsEditCityOpen(false)}
         />
       )}
 
-      <ul className="city-list">
-        {cityList.map((city) => (
-          <li key={city.id}>
-            <p>{city.name}  
-              <button onClick={() => handleViewCity(city)}>View</button> 
-              <button onClick={() => {setSelectedCity(city); setIsEditCityOpen(true);}}>Edit</button> 
-              <button onClick={() => handleDeleteCity(city.id)}>Delete</button>
-            </p>
-          </li>
-        ))}
-      </ul>
+    <table className="city-list">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cityList.map((city) => (
+            <tr key={city.id}>
+              <td>{city.name}</td>
+              <td>
+                <button onClick={() => handleViewCity(city)}>View</button>
+                <button onClick={() => {setSelectedEditCity(city); setIsEditCityOpen(true);}}>Edit</button>
+                <button onClick={() => handleDeleteCity(city.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

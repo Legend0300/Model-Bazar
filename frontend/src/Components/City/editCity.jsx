@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './city.css';
 
-const EditCity = () => {
+const EditCity = ({ city }) => {
     const [formData, setFormData] = useState({
-        name: '',
-        district: '',
-        province: '',
-        prefix: '',
+        name: city.name || '',
+        district: city.district || '',
+        province: city.province || '',
+        prefix: city.prefix || '',
     });
+
     const [loading, setLoading] = useState(false);
     const [submissionError, setSubmissionError] = useState(null);
 
@@ -18,13 +19,14 @@ const EditCity = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         setLoading(true);
         setSubmissionError(null);
-
+    
         try {
-            const response = await axios.post('http://localhost:8000/cities', formData);
-            console.log('City edited successfully:', response.data);
+            // Use axios.put for updating an existing city
+            await axios.put(`http://localhost:8000/cities/${city.id}`, formData);
+            console.log('City edited successfully');
             setFormData({ name: '', district: '', province: '', prefix: '' });
         } catch (error) {
             console.error('Error editing city:', error.message);
@@ -33,6 +35,7 @@ const EditCity = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <div className="edit-city-container">
@@ -85,4 +88,5 @@ const EditCity = () => {
         </div>
     );
 };
+
 export default EditCity;

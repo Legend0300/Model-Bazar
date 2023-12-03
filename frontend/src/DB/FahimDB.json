@@ -1,14 +1,7 @@
 {
   "cities": [
     {
-      "name": "lahore",
-      "district": "lahore",
-      "province": "punjab",
-      "prefix": "LHR",
-      "id": 1
-    },
-    {
-      "name": "islamabad",
+      "name": "islamabad lund",
       "district": "islamabad",
       "province": "islamabad capital territory",
       "prefix": "ISB",
