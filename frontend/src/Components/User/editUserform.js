@@ -13,14 +13,8 @@ import {
 
 import "./createUserFormStyle.css";
 
-const CreateUserForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    phone: "",
-    userType: "SuperAdmin",
-  });
+const EditUserForm = ({user}) => {
+  const [formData, setFormData] = useState(user);
 
   const [errors, setErrors] = useState({});
 
@@ -69,13 +63,13 @@ const CreateUserForm = () => {
     return null;
   };
 
-  const createUser = async (user) => {
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
+  const editUser = async (userData) => {
+    const response = await fetch(`http://localhost:3000/users/${userData.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userData),
     });
     const data = await response.json();
     console.log(data);
@@ -87,16 +81,7 @@ const CreateUserForm = () => {
     // Validate the form before submitting
     if (validateForm()) {
       // Form data is valid, submit the form)
-      createUser(formData);
-
-      // console.log("Form data:", formData);
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        phone: "",
-        userType: "SuperAdmin",
-      });
+      editUser(formData,formData.id);
     } else {
       console.log("Form contains errors. Please correct them.");
     }
@@ -105,7 +90,7 @@ const CreateUserForm = () => {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
-        <h2 className="form-title">Create User</h2>
+        <h2 className="form-title">Update {formData.username}</h2>
 
         <div className="input-container">
           <label>Username:</label>
@@ -202,11 +187,11 @@ const CreateUserForm = () => {
         </div>
 
         <button type="submit" className="button-style">
-          Create User
+          update User
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateUserForm;
+export default EditUserForm;
