@@ -54,21 +54,14 @@ const deleteUser = async (req, res) => {
 // Update a user
 const updateUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findByIdAndUpdate(req.params.id , req.body , {new : true});
     if (user) {
-      user.username = req.body.username || user.username;
-      user.email = req.body.email || user.email;
-      user.password = req.body.password || user.password;
-      user.phone = req.body.phone || user.phone;
-      user.status = req.body.status || user.status;
-      user.userType = req.body.userType || user.userType;
-
-      const updatedUser = await user.save();
-      res.json(updatedUser);
+      res.json(user);
     } else {
       res.status(404).json({ message: 'User not found' });
     }
-  } catch (error) {
+  }
+  catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

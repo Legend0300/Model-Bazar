@@ -40,31 +40,18 @@ const getBazarById = async (req, res) => {
 
 // Update a bazar
 const updateBazar = async (req, res) => {
-    try {
-        const bazar = await BazarModel.findById(req.params.id);
-        if (bazar) {
-            bazar.name = req.body.name || bazar.name;
-            bazar.address = req.body.address || bazar.address;
-            bazar.city = req.body.city || bazar.city;
-            bazar.zone = req.body.zone || bazar.zone;
-            bazar.active = req.body.active || bazar.active;
-            bazar.approvedShops = req.body.approvedShops || bazar.approvedShops;
-            bazar.baseRentPermanent = req.body.baseRentPermanent || bazar.baseRentPermanent;
-            bazar.prefix = req.body.prefix || bazar.prefix;
-            bazar.image = req.body.image || bazar.image;
-            bazar.zoneManager = req.body.zoneManager || bazar.zoneManager;
-            bazar.bazarManager = req.body.bazarManager || bazar.bazarManager;
-            bazar.supervisor = req.body.supervisor || bazar.supervisor;
-
-            const updatedBazar = await bazar.save();
-            res.status(200).json(updatedBazar);
-        } else {
-            res.status(404).json({ message: 'Bazar not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+   try{
+    const bazar = await BazarModel.findByIdAndUpdate(req.params.id , req.body , {new : true});
+    if (bazar) {
+      res.json(bazar);
+    } else {
+      res.status(404).json({ message: 'Bazar not found' });
     }
-};
+}
+    catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+}
 
 // Delete a bazar
 const deleteBazar = async (req, res) => {

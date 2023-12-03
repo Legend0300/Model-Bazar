@@ -2,10 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const connect = require('./config/dbConnection');
 // const superadminRoutes = require('./routes/superadmin');
 const userRoutes = require('./routes/userRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
-const connect = require('./config/dbConnection');
 const bazarRoutes = require('./routes/bazarRoutes');
 const cityRoutes = require('./routes/cityRoutes');
 
