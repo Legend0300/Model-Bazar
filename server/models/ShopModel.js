@@ -55,12 +55,10 @@ const shopSchema = new mongoose.Schema({
 // Define models
 const StallCategory = mongoose.model('StallCategory', shopCategorySchema);
 const ShopType = mongoose.model('ShopType', shopTypeSchema);
-const IncomeCategory = mongoose.model('IncomeCategory', incomeCategorySchema);
 const Shop = mongoose.model('Shop', shopSchema);
 
 module.exports = {
     StallCategory,
     ShopType,
-    IncomeCategory,
     Shop
 };
