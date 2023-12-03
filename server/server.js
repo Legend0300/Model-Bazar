@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// connect();
+connect();
 
 app.use(express.json());
 app.use(errorHandler);
@@ -31,7 +31,7 @@ app.use('/shops', shopRoutes);
 app.use('/shop-holders', shopHolderRoutes);
 
 app.route('/').get((req, res) => {
-  res.send(':(');
+  res.send('homepage of API');
 });
 
 
