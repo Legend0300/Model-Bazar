@@ -1,18 +1,44 @@
 {
   "cities": [
     {
-      "name": "islamabad lund",
-      "district": "islamabad",
-      "province": "islamabad capital territory",
-      "prefix": "ISB",
-      "id": 2
+      "name": "lahoruiyuou",
+      "district": "sud",
+      "province": "punjab",
+      "prefix": "skr",
+      "id": 4
     },
     {
-      "name": "karachi",
-      "district": "karachi",
-      "province": "sindh",
-      "prefix": "KAR",
-      "id": 3
+      "name": "islamabad",
+      "district": "islamabad",
+      "province": "capital",
+      "prefix": "ISB",
+      "id": 5
+    },
+    {
+      "name": "peshawar",
+      "district": "peshawar",
+      "province": "khyber pakhtunkhwa",
+      "prefix": "PES",
+      "id": 6
+    },
+    {
+      "name": "fsd",
+      "district": "sud",
+      "province": "punjab",
+      "prefix": "fsd",
+      "id": 7
+    }
+  ],
+  "zones": [
+    {
+      "name": "skkhar",
+      "active": false,
+      "cities": [
+        "lhr",
+        "fgdg"
+      ],
+      "zoneManager": "dfhdf",
+      "id": "96b1a016-c1e0-42cd-a3f3-a7de0431d479"
     }
   ]
 }
