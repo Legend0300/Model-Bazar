@@ -12,17 +12,9 @@ import {
 } from "react-icons/fa";
 
 import "./createUserFormStyle.css";
-import validateForm from "./validateForm";
 
-const CreateUserForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    phone: "",
-    status: "inactive",
-    userType: "",
-  });
+const EditUserForm = ({user}) => {
+  const [formData, setFormData] = useState(user);
 
   const [errors, setErrors] = useState({});
 
@@ -38,34 +30,31 @@ const CreateUserForm = () => {
     }));
   };
 
-  // const validateForm = () => {
-  //   const newErrors = {};
+  const validateForm = () => {
+    const newErrors = {};
 
     // Basic validation, you can add more complex validation if needed
-  //   if (!formData.username.trim()) {
-  //     newErrors.username = "Username is required";
-  //   }
+    if (!formData.username.trim()) {
+      newErrors.username = "Username is required";
+    }
 
-  //   if (!formData.email.trim() || !formData.email.includes('.com')) {
-  //     newErrors.email = "Email is required";
-  //   }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    }
 
-  //   if (!formData.password.trim()) {
-  //     newErrors.password = "Password is required";
-  //   }
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    }
 
-  //   if (!formData.phone.trim()) {
-  //     newErrors.phone = "Phone is required";
-  //   }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone is required";
+    }
 
-  //   if (!formData.userType.trim()) {
-  //     newErrors.userType = "User Type is required";
-  //   }
-  //   setErrors(newErrors);
+    setErrors(newErrors);
 
-  //   // Return true if there are no errors, false otherwise
-  //   return Object.keys(newErrors).length === 0;
-  // };
+    // Return true if there are no errors, false otherwise
+    return Object.keys(newErrors).length === 0;
+  };
 
   const renderIcon = (fieldName) => {
     if (formData[fieldName] && !errors[fieldName]) {
@@ -74,13 +63,13 @@ const CreateUserForm = () => {
     return null;
   };
 
-  const createUser = async (user) => {
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
+  const editUser = async (userData) => {
+    const response = await fetch(`http://localhost:3000/users/${userData.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userData),
     });
     const data = await response.json();
     console.log(data);
@@ -90,19 +79,9 @@ const CreateUserForm = () => {
     e.preventDefault();
 
     // Validate the form before submitting
-    if (validateForm(formData, setErrors)) {
+    if (validateForm()) {
       // Form data is valid, submit the form)
-      createUser(formData);
-
-      // console.log("Form data:", formData);
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        phone: "",
-        status: "inactive",
-        userType: "",
-      });
+      editUser(formData,formData.id);
     } else {
       console.log("Form contains errors. Please correct them.");
     }
@@ -111,7 +90,7 @@ const CreateUserForm = () => {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
-        <h2 className="form-title">Create User</h2>
+        <h2 className="form-title">Update {formData.username}</h2>
 
         <div className="input-container">
           <label>Username:</label>
@@ -188,9 +167,7 @@ const CreateUserForm = () => {
             value={formData.userType}
             onChange={handleChange}
             className="select-style"
-
           >
-            <option disabled selected value="">select role</option>
             <option value="SuperAdmin">
               <FaUserShield className="super-admin-icon" /> SuperAdmin
             </option>
@@ -210,12 +187,11 @@ const CreateUserForm = () => {
         </div>
 
         <button type="submit" className="button-style">
-          Create User
+          update User
         </button>
       </form>
     </div>
   );
 };
 
-
-export default CreateUserForm;
+export default EditUserForm;
