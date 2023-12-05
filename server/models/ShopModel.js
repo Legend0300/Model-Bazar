@@ -33,8 +33,7 @@ const shopSchema = new mongoose.Schema({
         ref: 'StallCategory',
     },
     shopType: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ShopType',
+        type: String,
         required: true
     },
     vacant : {

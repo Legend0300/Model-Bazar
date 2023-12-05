@@ -2,11 +2,13 @@ const Zone = require('../models/ZoneModel');
 
 // Create a new zone
 const createZone = async (req, res) => {
+  const zone = new Zone(req.body);
+
   try {
-    const zone = await Zone.create(req.body);
-    res.status(201).json(zone);
+    const newZone = await zone.save();
+    res.status(201).json(newZone);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create zone' });
+    res.status(400).json({ error: 'Failed to create zone' });
   }
 };
 
