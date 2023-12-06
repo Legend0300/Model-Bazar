@@ -4,8 +4,7 @@ import CityList from './Components/City/cityList';
 function App() {
   return (
     <div className="App">
-      <CityList/>
-      <ZoneList/>
+      <ZoneList />
       </div>
   );
 }

@@ -10,43 +10,84 @@ const ZoneList = () => {
   const [zones, setZones] = useState([]);
   const [selectedZone, setSelectedZone] = useState(null);
   const [mode, setMode] = useState("view");
+  const [cityList, setCityList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/zones")
-      .then((response) => setZones(response.data))
-      .catch((error) => console.error("Error fetching zones:", error));
+    fetchZones();
   }, []);
 
-  const handleCreate = (newZone) => {
+  const fetchZones = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/zones");
+      setZones(response.data);
+    } catch (error) {
+      console.error("Error fetching zones:", error);
+    }
+  };
+
+  const fetchCities = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/cities");
+      setCityList(response.data);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
+  };
+
+  const handleCreate = async (newZone, onCreateSuccess) => {
     const id = uuidv4();
     const zoneWithId = { ...newZone, id };
 
-    axios
-      .post("http://localhost:8000/zones", zoneWithId)
-      .then((response) => {
-        setZones([...zones, response.data]);
-        setSelectedZone(response.data);
-        setMode("view");
-      })
-      .catch((error) => console.error("Error creating zone:", error));
+    try {
+      await axios.post("http://localhost:8000/zones", zoneWithId);
+      console.log('Zone created successfully!');
+      onCreateSuccess(); // Close the CreateZone form
+      fetchZones(); // Refresh the zone list
+    } catch (error) {
+      console.error("Error creating zone:", error);
+    }
   };
 
-  const handleView = (zone) => {
-    setSelectedZone(zone);
+  const handleView = async (zone) => {
+    if (selectedZone === zone) {
+      setSelectedZone(null); // Hide details if the same zone is clicked
+    } else {
+      setSelectedZone(zone);
+    }
     setMode("view");
   };
 
-  const handleEdit = (zone) => {
-    setSelectedZone(zone);
-    setMode("edit");
+  const handleEdit = async (zone) => {
+    try {
+      await fetchCities(); // Fetch the latest list of cities
+      setSelectedZone(zone);
+      setMode("edit");
+    } catch (error) {
+      console.error("Error fetching cities for editing:", error);
+    }
   };
 
-  const handleDelete = (zone) => {
-    axios
-      .delete(`http://localhost:8000/zones/${zone.id}`)
-      .then(() => setZones(zones.filter((z) => z.id !== zone.id)))
-      .catch((error) => console.error("Error deleting zone:", error));
+  const handleDelete = async (zone) => {
+    try {
+      await axios.delete(`http://localhost:8000/zones/${zone.id}`);
+      console.log('Zone deleted successfully!');
+      setZones(zones.filter((z) => z.id !== zone.id));
+    } catch (error) {
+      console.error("Error deleting zone:", error);
+    }
+  };
+
+  const handleUpdateSuccess = async () => {
+    try {
+      await fetchZones(); // Fetch the latest list of zones
+      console.log('Zone updated successfully!');
+    } catch (error) {
+      console.error("Error fetching updated zones:", error);
+    }
+    
+    // Additional logic after updating the zone, e.g., close the form and reset mode
+    setSelectedZone(null);
+    setMode("view");
   };
 
   return (
@@ -69,11 +110,23 @@ const ZoneList = () => {
       <button onClick={() => setMode("create")} className="create-button">
         Create Zone
       </button>
-      {mode === "view" && selectedZone && <ViewZone zoneData={selectedZone} />}
-      {mode === "edit" && selectedZone && (
-        <EditZone initialData={selectedZone} />
+      {mode === "view" && selectedZone && (
+        <ViewZone zoneData={selectedZone} onDeleteSuccess={fetchZones} />
       )}
-      {mode === "create" && <CreateZone onCreate={handleCreate} />}
+      {mode === "edit" && selectedZone && (
+        <EditZone
+          initialData={selectedZone}
+          onUpdateSuccess={handleUpdateSuccess}
+          cityList={cityList} // Pass the latest city list to EditZone
+        />
+      )}
+      {mode === "create" && (
+        <CreateZone
+          onCreate={(newZone, onCreateSuccess) =>
+            handleCreate(newZone, onCreateSuccess)
+          }
+        />
+      )}
     </div>
   );
 };

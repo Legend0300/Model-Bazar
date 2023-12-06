@@ -2,7 +2,7 @@
   "cities": [
     {
       "name": "lahoruiyuou",
-      "district": "sud",
+      "district": "dfgsldb",
       "province": "punjab",
       "prefix": "skr",
       "id": 4
@@ -31,14 +31,43 @@
   ],
   "zones": [
     {
-      "name": "skkhar",
-      "active": false,
+      "name": "lahore",
+      "active": true,
       "cities": [
-        "lhr",
-        "fgdg"
+        "lahoruiyuou",
+        "islamabad"
       ],
-      "zoneManager": "dfhdf",
-      "id": "96b1a016-c1e0-42cd-a3f3-a7de0431d479"
+      "zoneManager": "saad",
+      "id": 1
+    },
+    {
+      "name": "skkhar",
+      "active": true,
+      "cities": [
+        "islamabad",
+        "lahoruiyuou"
+      ],
+      "zoneManager": "akram",
+      "id": 2
+    },
+    {
+      "name": "pashaawaaar",
+      "active": true,
+      "cities": [
+        "peshawar"
+      ],
+      "zoneManager": "kalim",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "fffff",
+      "active": true,
+      "cities": [
+        "lahoruiyuou",
+        "islamabad"
+      ],
+      "zoneManager": "saad"
     }
   ]
 }
