@@ -104,5 +104,27 @@
       "edible": true,
       "id": 24
     }
+  ],
+  "shopTypes": [
+    {
+      "name": "Furniture",
+      "id": 12
+    },
+    {
+      "name": "Home Appliances",
+      "id": 13
+    },
+    {
+      "name": "Kitchen Appliances",
+      "id": 14
+    },
+    {
+      "name": "Cosmetics",
+      "id": 15
+    },
+    {
+      "name": "fsd",
+      "id": 16
+    }
   ]
 }
