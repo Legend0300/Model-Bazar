@@ -1,73 +1,108 @@
 {
   "cities": [
     {
-      "name": "lahoruiyuou",
-      "district": "dfgsldb",
-      "province": "punjab",
-      "prefix": "skr",
+      "name": "Lahore",
+      "district": "Lahore",
+      "province": "Punjab",
+      "prefix": "LHE",
       "id": 4
     },
     {
-      "name": "islamabad",
-      "district": "islamabad",
-      "province": "capital",
+      "name": "Islamabad",
+      "district": "Islamabad",
+      "province": "Capital",
       "prefix": "ISB",
       "id": 5
     },
     {
-      "name": "peshawar",
-      "district": "peshawar",
-      "province": "khyber pakhtunkhwa",
-      "prefix": "PES",
+      "name": "Peshawar",
+      "district": "Peshawar",
+      "province": "Khyber Pakhtunkhwa",
+      "prefix": "PEW",
       "id": 6
     },
     {
-      "name": "fsd",
-      "district": "sud",
-      "province": "punjab",
-      "prefix": "fsd",
+      "name": "Faisalabad",
+      "district": "Faisalabad",
+      "province": "Punjab",
+      "prefix": "FSD",
       "id": 7
     }
   ],
   "zones": [
     {
-      "name": "lahore",
-      "active": true,
+      "name": "Lahore Zone 1",
+      "active": false,
       "cities": [
-        "lahoruiyuou",
-        "islamabad"
+        "Lahore"
       ],
-      "zoneManager": "saad",
+      "zoneManager": "Akram",
       "id": 1
     },
     {
-      "name": "skkhar",
-      "active": true,
+      "name": "Lahore Zone 2",
+      "active": false,
       "cities": [
-        "islamabad",
-        "lahoruiyuou"
+        "Faisalabad"
       ],
-      "zoneManager": "akram",
+      "zoneManager": "Akram",
       "id": 2
     },
     {
-      "name": "pashaawaaar",
-      "active": true,
+      "name": "pk",
+      "active": false,
       "cities": [
-        "peshawar"
+        "Islamabad"
       ],
-      "zoneManager": "kalim",
+      "zoneManager": "mnbhj",
       "id": 3
+    }
+  ],
+  "shopCategories": [
+    {
+      "name": "Furniture",
+      "id": 16,
+      "edible": false
     },
     {
-      "id": 4,
-      "name": "fffff",
-      "active": true,
-      "cities": [
-        "lahoruiyuou",
-        "islamabad"
-      ],
-      "zoneManager": "saad"
+      "name": "Home Appliances",
+      "id": 17,
+      "edible": false
+    },
+    {
+      "name": "Kitchen Appliances",
+      "id": 18,
+      "edible": false
+    },
+    {
+      "name": "Cosmetics",
+      "id": 19,
+      "edible": false
+    },
+    {
+      "name": "Gifts",
+      "id": 20,
+      "edible": false
+    },
+    {
+      "name": "Pets",
+      "id": 21,
+      "edible": false
+    },
+    {
+      "name": "Other",
+      "id": 22,
+      "edible": false
+    },
+    {
+      "name": "aqib",
+      "edible": true,
+      "id": 23
+    },
+    {
+      "name": "lahoreeee",
+      "edible": true,
+      "id": 24
     }
   ]
 }

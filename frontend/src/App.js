@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import ZoneList from './Components/Zone/zoneList';
-import CityList from './Components/City/cityList';
+import React from 'react';
+import ListShopCategories from './Components/Shop/ShopCategory/listShopCategories';
 function App() {
   return (
     <div className="App">
-      <ZoneList />
+      <ListShopCategories />
       </div>
   );
 }

@@ -4,10 +4,10 @@ import './zone.css';
 
 const CreateZone = ({ onCreate }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    name: '',
     active: false,
-    cities: [""],
-    zoneManager: "",
+    cities: [''],
+    zoneManager: '',
   });
 
   const [cityList, setCityList] = useState([]);
@@ -15,15 +15,15 @@ const CreateZone = ({ onCreate }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/cities")
+      .get('http://localhost:8000/cities')
       .then((response) => setCityList(response.data))
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => console.error('Error:', error));
   }, []);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
 
-    if (name === "cities") {
+    if (name === 'cities') {
       const newCities = [...formData.cities];
       newCities[index] = value;
 
@@ -35,46 +35,59 @@ const CreateZone = ({ onCreate }) => {
     } else {
       setFormData({
         ...formData,
-        [name]: type === "checkbox" ? checked : value,
+        [name]: type === 'checkbox' ? checked : value,
       });
     }
   };
 
   const handleAddCity = () => {
-    setFormData({ ...formData, cities: [...formData.cities, ""] });
+    setFormData((prevData) => ({ ...prevData, cities: [...prevData.cities, ''] }));
   };
 
   const handleRemoveCity = (index) => {
-    const newCities = [...formData.cities];
-    const updatedSelectedCities = [...selectedCities];
+    setFormData((prevData) => {
+      const newCities = [...prevData.cities];
+      const updatedSelectedCities = [...selectedCities];
 
-    newCities.splice(index, 1);
-    updatedSelectedCities.splice(index, 1);
+      newCities.splice(index, 1);
+      updatedSelectedCities.splice(index, 1);
 
-    setFormData({ ...formData, cities: newCities });
-    setSelectedCities(updatedSelectedCities);
+      return { ...prevData, cities: newCities };
+    });
+
+    setSelectedCities((prevSelectedCities) => {
+      const updatedSelectedCities = [...prevSelectedCities];
+      updatedSelectedCities.splice(index, 1);
+      return updatedSelectedCities;
+    });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post("http://localhost:8000/zones", formData);
-      onCreate(response.data, () => {
-        setFormData({
-          name: "",
-          active: false,
-          cities: [""],
-          zoneManager: "",
-        });
-        setSelectedCities([]);
-      });
       console.log('Zone created successfully!');
+      
+      onCreate(response.data);
+
+      setFormData({
+        name: "",
+        active: false,
+        cities: [""],
+        zoneManager: "",
+      });
+  
+      // Reset the selected cities
+      setSelectedCities([]);
     } catch (error) {
       console.error('Error creating zone:', error);
     }
   };
-
+  
+  
+  
   const getAvailableCities = () => {
     return cityList.filter((city) => !selectedCities.includes(city.name));
   };
@@ -115,7 +128,9 @@ const CreateZone = ({ onCreate }) => {
               required
               className="form-input"
             >
-              <option value="" disabled>Select a city</option>
+              <option value="" disabled>
+                Select a city
+              </option>
               {getAvailableCities().map((cityOption) => (
                 <option key={cityOption.id} value={cityOption.name}>
                   {cityOption.name}
@@ -131,13 +146,21 @@ const CreateZone = ({ onCreate }) => {
                 )}
             </select>
           </label>
-          <button type="button" onClick={() => handleRemoveCity(index)} className="remove-button">
+          <button
+            type="button"
+            onClick={() => handleRemoveCity(index)}
+            className="remove-button"
+          >
             Remove
           </button>
         </div>
       ))}
 
-      <button type="button" onClick={handleAddCity} className="add-button">
+      <button
+        type="button"
+        onClick={handleAddCity}
+        className="add-button"
+      >
         Add City
       </button>
 
