@@ -5,32 +5,50 @@ const ShopHolder = require("../models/ShopHolderModel");
 
 // Create a new shopAllotment
 const assignShop = async (req, res) => {
+  console.log(req.body);
     //Bazar Manger can do it
   try {
     const shop = await Shop.findOne({shopID : req.body.shop});
+    console.log(shop);
+
     if (!shop) {
       return res.status(404).json({ error: "Shop not found" });
     }
 
     const shopHolder = await ShopHolder.findOne({cnic : req.body.shopHolder});
+    console.log(shopHolder);
     if (!shopHolder) {
       return res.status(404).json({ error: "ShopHolder not found" });
     }
-        
-    const shopAllotment = await ShopAllotment.create(
-        {
-            shop: shop,
-            shopholder: shopHolder,
-            Status: "Pending",
-            monthlyRent: req.body.monthlyRent,
-            securityPaid: req.body.securityPaid,
-            securityPaidDate: req.body.securityPaidDate,
-            securityPaidAmount: req.body.securityPaidAmount,
-            securityPaidTxID: req.body.securityPaidTxID,
-        }
-    );
 
-    shop.shopType.
+    
+    const shopAllotment = await ShopAllotment.create(
+      {
+        TxID: 123,
+        Shop: shop,
+        shopholder: shopHolder,
+        Status: "Active",
+        monthlyRent: req.body.monthlyRent
+      }
+      );
+
+      if(!req.body.security)
+      {
+        shopAllotment.securityPaid = false;
+      }
+      else{
+        shopAllotment.securityPaid = false;
+      }
+
+
+
+      await shopAllotment.save();
+
+      shop.vacant = false;
+      await shop.save();
+      
+      console.log("cleared!");
+
     res.status(201).json(shopAllotment);
   } catch (error) {
     res.status(500).json({ error: "Failed to create shopAllotment" });
@@ -38,7 +56,7 @@ const assignShop = async (req, res) => {
 };
 
 const approveShopAllotment = async (req, res) => {
-    //Zone Manger can do it
+    //Bazar Manger can do it
   try {
     const shopAllotment = await ShopAllotment.findById(req.body.id);
     if (!shopAllotment) {
