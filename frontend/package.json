@@ -13,6 +13,7 @@
     "react-router-dom": "^6.20.1",
     "react-scripts": "^3.4.4",
     "reacticons": "^0.0.1",
+    "tailwindcss": "^3.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

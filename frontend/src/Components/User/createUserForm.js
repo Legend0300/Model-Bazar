@@ -14,7 +14,7 @@ import {
 import "./createUserFormStyle.css";
 import validateForm from "./validateForm";
 
-const CreateUserForm = () => {
+const CreateUserForm = ({onClose}) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -37,35 +37,6 @@ const CreateUserForm = () => {
       [name]: "", // Clear previous errors when the user starts typing
     }));
   };
-
-  // const validateForm = () => {
-  //   const newErrors = {};
-
-    // Basic validation, you can add more complex validation if needed
-  //   if (!formData.username.trim()) {
-  //     newErrors.username = "Username is required";
-  //   }
-
-  //   if (!formData.email.trim() || !formData.email.includes('.com')) {
-  //     newErrors.email = "Email is required";
-  //   }
-
-  //   if (!formData.password.trim()) {
-  //     newErrors.password = "Password is required";
-  //   }
-
-  //   if (!formData.phone.trim()) {
-  //     newErrors.phone = "Phone is required";
-  //   }
-
-  //   if (!formData.userType.trim()) {
-  //     newErrors.userType = "User Type is required";
-  //   }
-  //   setErrors(newErrors);
-
-  //   // Return true if there are no errors, false otherwise
-  //   return Object.keys(newErrors).length === 0;
-  // };
 
   const renderIcon = (fieldName) => {
     if (formData[fieldName] && !errors[fieldName]) {
@@ -92,8 +63,14 @@ const CreateUserForm = () => {
     // Validate the form before submitting
     if (validateForm(formData, setErrors)) {
       // Form data is valid, submit the form)
-      createUser(formData);
-
+      const formDataWithStatus = {
+        ...formData,
+        status: "inactive",
+      };
+  
+      createUser(formDataWithStatus);
+    
+      
       // console.log("Form data:", formData);
       setFormData({
         username: "",
@@ -103,6 +80,7 @@ const CreateUserForm = () => {
         status: "inactive",
         userType: "",
       });
+      onClose();
     } else {
       console.log("Form contains errors. Please correct them.");
     }
@@ -115,7 +93,7 @@ const CreateUserForm = () => {
 
         <div className="input-container">
           <label>Username:</label>
-          <div className="relative flex items-center">
+          <div>
             <input
               type="text"
               name="username"
@@ -208,10 +186,14 @@ const CreateUserForm = () => {
             </option>
           </select>
         </div>
-
-        <button type="submit" className="button-style">
+        <section className="buttons">
+        <button type="submit" className=" create-button">
           Create User
         </button>
+        <button type="button" onClick={onClose} className="cancel-button">
+          Cancel
+        </button>
+        </section>
       </form>
     </div>
   );
