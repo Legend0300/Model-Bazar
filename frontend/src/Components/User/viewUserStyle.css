@@ -12,9 +12,9 @@
     align-items: center;
     justify-content: center;
     /* position: relative; */
-    z-index: 9999;
+    z-index: 9998;
     width: 60%;
-    height: 80%;
+    height: 90%;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(2px);
     overflow: hidden; /* Hide content overflow */
