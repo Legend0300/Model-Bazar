@@ -1,44 +1,130 @@
 {
   "cities": [
     {
-      "name": "lahoruiyuou",
-      "district": "sud",
-      "province": "punjab",
-      "prefix": "skr",
+      "name": "Lahoreowo",
+      "district": "Lahore",
+      "province": "Punjab",
+      "prefix": "LHE",
       "id": 4
     },
     {
-      "name": "islamabad",
-      "district": "islamabad",
-      "province": "capital",
+      "name": "Islamabad",
+      "district": "Islamabad",
+      "province": "Capital",
       "prefix": "ISB",
       "id": 5
     },
     {
-      "name": "peshawar",
-      "district": "peshawar",
-      "province": "khyber pakhtunkhwa",
-      "prefix": "PES",
+      "name": "Peshawar",
+      "district": "Peshawar",
+      "province": "Khyber Pakhtunkhwa",
+      "prefix": "PEW",
       "id": 6
     },
     {
-      "name": "fsd",
-      "district": "sud",
-      "province": "punjab",
-      "prefix": "fsd",
+      "name": "Faisalabad",
+      "district": "Faisalabad",
+      "province": "Punjab",
+      "prefix": "FSD",
       "id": 7
     }
   ],
   "zones": [
     {
-      "name": "skkhar",
+      "name": "Lahore Zone 1",
       "active": false,
       "cities": [
-        "lhr",
-        "fgdg"
+        "Lahore"
       ],
-      "zoneManager": "dfhdf",
-      "id": "96b1a016-c1e0-42cd-a3f3-a7de0431d479"
+      "zoneManager": "Akram",
+      "id": 1
+    },
+    {
+      "name": "Lahore Zone 2",
+      "active": false,
+      "cities": [
+        "Faisalabad"
+      ],
+      "zoneManager": "Akram",
+      "id": 2
+    },
+    {
+      "name": "pk",
+      "active": false,
+      "cities": [
+        "Islamabad"
+      ],
+      "zoneManager": "mnbhj",
+      "id": 3
+    }
+  ],
+  "shopCategories": [
+    {
+      "name": "Furniture",
+      "id": 16,
+      "edible": false
+    },
+    {
+      "name": "Home Appliances",
+      "id": 17,
+      "edible": false
+    },
+    {
+      "name": "Kitchen Appliances",
+      "id": 18,
+      "edible": false
+    },
+    {
+      "name": "Cosmetics",
+      "id": 19,
+      "edible": false
+    },
+    {
+      "name": "Gifts",
+      "id": 20,
+      "edible": false
+    },
+    {
+      "name": "Pets",
+      "id": 21,
+      "edible": false
+    },
+    {
+      "name": "Other",
+      "id": 22,
+      "edible": false
+    },
+    {
+      "name": "aqib",
+      "edible": true,
+      "id": 23
+    },
+    {
+      "name": "lahoreeee",
+      "edible": true,
+      "id": 24
+    }
+  ],
+  "shopTypes": [
+    {
+      "name": "Furniture",
+      "id": 12
+    },
+    {
+      "name": "Home Appliances",
+      "id": 13
+    },
+    {
+      "name": "Kitchen Appliances",
+      "id": 14
+    },
+    {
+      "name": "Cosmetics",
+      "id": 15
+    },
+    {
+      "name": "fsd",
+      "id": 16
     }
   ]
 }

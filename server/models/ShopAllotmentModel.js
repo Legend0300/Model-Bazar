@@ -1,22 +1,49 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const shopAllotmentSchema = new mongoose.Schema({
-    TxID: { type: String, required: true, unique: true },
-    AllotmentDate: { type: Date, default: Date.now },
-    Shop: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop', required: true },
-    shopholder: { type: mongoose.Schema.Types.ObjectId, ref: 'ShopHolder', required: true }, // Assuming there is a 'ShopHolder' model
-    Rent: { type: Number, required: true },
-    FacePicture: { type: String, required: true },
-    CNICFrontPicture: { type: String, required: true },
-    CNICBackPicture: { type: String, required: true },
-    ApprovedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Assuming there is a 'ZoneManager' model
-    AllotedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Assuming there is a 'ZoneManager' model
-    Status: { type: String, enum: ['verified', 'not_verified'], default: 'not_verified' },
-    StartDate: { type: Date, required: true },
-    EndDate: { type: Date, required: true },
-    PaidSecurityVCHR: { type: Number },
-});
+  TxID: { type: String, required: true, unique: true },
+  AllotmentDate: { type: Date, default: Date.now },
+  Shop: { type: mongoose.Schema.Types.ObjectId, ref: "Shop", required: true },
+  monthlyRent: { type: Number, required: true },
+  shopholder: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ShopHolder",
+    required: true,
+  }, // Assuming there is a 'ShopHolder' model
+  voucher: { type: mongoose.Schema.Types.ObjectId, ref: "Voucher" },
+  Status: {
+    type: String,
+    enum: ["Pending", "Active" ,"Rejected"],
+    default: "Pending",
+  },
+  securityPaid: {
+    type: Boolean,
+    default: false,
+  },
+  securityPaidDate: {
+    type: Date,
+  },
+  securityPaidAmount: {
+    type: Number,
+    default: 0,
+  },
+  securityPaidTxID: {
+    type: String,
+  },
+  Agreement: {
+    type: String,
+  },
+  AgreementDate: {
+    type: Date,
+  },
+  AgreementExpiry: {
+    type: Date,
+  },
 
-const ShopAllotment = mongoose.model('ShopAllotment', shopAllotmentSchema);
+  }
+);
+
+
+const ShopAllotment = mongoose.model("ShopAllotment", shopAllotmentSchema);
 
 module.exports = ShopAllotment;

@@ -8,6 +8,7 @@ const bazarRoutes = require('./routes/bazarRoutes');
 const cityRoutes = require('./routes/cityRoutes');
 const shopRoutes = require('./routes/shopRouters');
 const shopHolderRoutes = require('./routes/shopHolderRoutes');
+const ShopAllotmentRoutes = require('./routes/shopAllotmentRoutes');
 const errorHandler = require("./middleware/errorHandler");
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/bazars', bazarRoutes);
 app.use('/cities', cityRoutes);
 app.use('/shops', shopRoutes);
 app.use('/shop-holders', shopHolderRoutes);
+app.use('/shop-allotments', ShopAllotmentRoutes);
 
 app.route('/').get((req, res) => {
   res.send('homepage of API');
