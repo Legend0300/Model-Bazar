@@ -3,135 +3,159 @@ import axios from "axios";
 import CreateShop from "./createShop";
 import EditShop from "./editShop";
 import ViewShop from "./viewShop";
+import "./shop.css";
+import { useState, useEffect } from "react";
 
-const ListShops = (props) => {
-    const [shops, setShops] = React.useState([]);
-    const [shopCategories, setShopCategories] = React.useState([]);
-    const [shopTypes, setShopTypes] = React.useState([]);
-    const [create, setCreate] = React.useState(false);
-    const [edit, setEdit] = React.useState(false);
-    const [view, setView] = React.useState(false);
-    const [shopID, setShopID] = React.useState("");
-    const [shopCategory, setShopCategory] = React.useState("");
-    const [shopType, setShopType] = React.useState("");
-    const [vacant, setVacant] = React.useState(true);
-    const [bazar, setBazar] = React.useState("");
-    const [size, setSize] = React.useState("");
-    React.useEffect(() => {
-        axios
-            .get("http://localhost:8000/shops")
-            .then(response => {
-                setShops(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        axios
-            .get("http://localhost:8000/shopCategories")
-            .then(response => {
-                setShopCategories(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        axios
-            .get("http://localhost:8000/shopTypes")
-            .then(response => {
-                setShopTypes(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+const ListShops = () => {
+    const [shops, setShops] = useState([]);
+    const [shopCategories, setShopCategories] = useState([]);
+    const [shopTypes, setShopTypes] = useState([]);
+    const [selectedShop, setSelectedShop] = useState(null);
+    const [creating, setCreating] = useState(false);
+    const [editing, setEditing] = useState(false);
+    const [mode, setMode] = useState("view");
+    const [formData, setFormData] = useState({
+        shopID: "",
+        shopCategory: "",
+        shopType: "",
+        vacant: true,
+        bazar: "",
+        size: "",
+    });
 
-    const handleCreate = () => {
-        setCreate(true);
-    };
+    useEffect(() => {
+        fetchShops();
+    }
+    , []);
 
-    const handleEdit = shop => {
-        setShopID(shop.shopID);
-        setShopCategory(shop.shopCategory);
-        setShopType(shop.shopType);
-        setVacant(shop.vacant);
-        setBazar(shop.bazar);
-        setSize(shop.size);
-        setEdit(true);
-    };
-
-    const handleView = shop => {
-        setShopID(shop.shopID);
-        setShopCategory(shop.shopCategory);
-        setShopType(shop.shopType);
-        setVacant(shop.vacant);
-        setBazar(shop.bazar);
-        setSize(shop.size);
-        setView(true);
-    };
-
-    const handleDelete = shop => {
-        axios
-            .delete("http://localhost:8000/shops/".concat(shop.shopID))
-            .then(response => {
-                console.log(response.data);
-                setShops(shops.filter(s => s.shopID !== shop.shopID));
-            }
-            )
-            .catch(error => {
-                console.error(error);
-            });
+    const fetchShops = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/shops");
+            setShops(response.data);
+        } catch (error) {
+            console.error("Error fetching shops:", error);
+        }
     }
 
-    const handleCreateSubmit = shop => {
-        axios
-            .post("http://localhost:8000/shops", {
-                shopID: shop.shopID,
-                shopCategory: shop.shopCategory,
-                shopType: shop.shopType,
-                vacant: shop.vacant,
-                bazar: shop.bazar,
-                size: shop.size
-            })
-            .then(response => {
-                console.log(response.data);
-                setShops([...shops, response.data]);
-                setCreate(false);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+    const fetchShopCategories = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/shopCategories");
+            setShopCategories(response.data);
+        } catch (error) {
+            console.error("Error fetching shop categories:", error);
+        }
+    }
 
-    const handleEditSubmit = shop => {
-        axios
-            .put("http://localhost:8000/shops/".concat(shop.shopID), {
-                shopID: shop.shopID,
-                shopCategory: shop.shopCategory,
-                shopType: shop.shopType,
-                vacant: shop.vacant,
-                bazar: shop.bazar,
-                size: shop.size
-            })
-            .then(response => {
-                console.log(response.data);
-                setShops(shops.map(s => s.shopID === shop.shopID ? response.data : s));
-                setEdit(false);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+    const fetchShopTypes = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/shopTypes");
+            setShopTypes(response.data);
+        } catch (error) {
+            console.error("Error fetching shop types:", error);
+        }
+    }
+
+    const handleCreate = async (newShop) => {
+        try {
+            await axios.post("http://localhost:8000/shops", newShop);
+            console.log("Shop created successfully!");
+            setCreating(false);
+            fetchShops();
+        } catch (error) {
+            console.error("Error creating shop:", error);
+        }
+    }
+
+    const handleView = async (shop, onDeleteSuccess) => {
+        if (selectedShop === shop) { 
+            setSelectedShop(null);
+        } else {
+            setSelectedShop(shop);
+        }
+        setMode("view");
+    }
+
+    const handleEdit = async (shop, onUpdateSuccess) => {
+        try {
+            await fetchShopCategories();
+            await fetchShopTypes();
+            setSelectedShop(shop);
+            setMode("edit");
+        } catch (error) {
+            console.error("Error fetching shop categories and types for editing:", error);
+        }
+    }
+
+
+    const handleDelete = async (shop) => {
+        try {
+            await axios.delete(`http://localhost:8000/shops/${shop.id}`);
+            console.log("Shop deleted successfully!");
+            fetchShops();
+        } catch (error) {
+            console.error("Error deleting shop:", error);
+        }
+    }
+
+    const onUpdateSuccess = () => {
+        fetchShops();
+        setMode("view");
+    }
 
     const handleCancel = () => {
-        setCreate(false);
-        setEdit(false);
-        setView(false);
+        setMode("view");
+    }
+
+    const onDeleteSuccess = () => {
+        fetchShops();
+        setMode("view");
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        axios
+            .put(`http://localhost:8000/shops/${formData.id}`, {
+                shopID: formData.shopID,
+                shopCategory: formData.shopCategory,
+                shopType: formData.shopType,
+                vacant: formData.vacant,
+                bazar: formData.bazar,
+                size: formData.size,
+            })
+            .then((response) => {
+                console.log(response.data);
+                onUpdateSuccess();
+            })
+            .catch((error) => console.error(error));
     };
 
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-12 card card-body mt-5">
-                    <h3>List of Shops</h3>
+                    <h2>Shops</h2>
+                    <button onClick={() => setCreating(true)} className="create-button">
+                        Create Shop
+                    </button>
+                    {creating && (
+                        <CreateShop
+                            onCreateSuccess={handleCreate}
+                            onCancel={handleCancel}
+                        />
+                    )}
+                    {selectedShop && mode === "edit" && (
+                        <EditShop
+                            initialData={selectedShop}
+                            onUpdateSuccess={onUpdateSuccess}
+                            onCancel={handleCancel}
+                        />
+                    )}
+                    {selectedShop && mode === "view" && (
+                        <ViewShop
+                            shopData={selectedShop}
+                            onDeleteSuccess={onDeleteSuccess}
+                        />
+                    )}
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -145,8 +169,8 @@ const ListShops = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {shops.map(shop => (
-                                <tr key={shop.shopID}>
+                            {shops.map((shop) => (
+                                <tr key={shop.id}>
                                     <td>{shop.shopID}</td>
                                     <td>{shop.shopCategory}</td>
                                     <td>{shop.shopType}</td>
@@ -155,20 +179,20 @@ const ListShops = (props) => {
                                     <td>{shop.size}</td>
                                     <td>
                                         <button
-                                            className="btn btn-primary btn-sm"
-                                            onClick={() => handleEdit(shop)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className="btn btn-primary btn-sm ml-1"
                                             onClick={() => handleView(shop)}
+                                            className="view-button"
                                         >
                                             View
                                         </button>
                                         <button
-                                            className="btn btn-danger btn-sm ml-1"
+                                            onClick={() => handleEdit(shop, onUpdateSuccess)}
+                                            className="edit-button"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
                                             onClick={() => handleDelete(shop)}
+                                            className="delete-button"
                                         >
                                             Delete
                                         </button>
@@ -177,45 +201,9 @@ const ListShops = (props) => {
                             ))}
                         </tbody>
                     </table>
-                    <button className="btn btn-primary" onClick={handleCreate}>
-                        Create
-                    </button>
                 </div>
             </div>
-            {create ? (
-                <CreateShop
-                    shopCategories={shopCategories}
-                    shopTypes={shopTypes}
-                    onSubmit={handleCreateSubmit}
-                    onCancel={handleCancel}
-                />
-            ) : null}
-            {edit ? (
-                <EditShop
-                    shopID={shopID}
-                    shopCategory={shopCategory}
-                    shopType={shopType}
-                    vacant={vacant}
-                    bazar={bazar}
-                    size={size}
-                    shopCategories={shopCategories}
-                    shopTypes={shopTypes}
-                    onSubmit={handleEditSubmit}
-                    onCancel={handleCancel}
-                />
-            ) : null}
-            {view ? (
-                <ViewShop
-                    shopID={shopID}
-                    shopCategory={shopCategory}
-                    shopType={shopType}
-                    vacant={vacant}
-                    bazar={bazar}
-                    size={size}
-                    onCancel={handleCancel}
-                />
-            ) : null}
-        </div>
+        </div >
     );
 }
 

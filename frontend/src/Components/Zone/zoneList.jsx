@@ -49,21 +49,35 @@ const ZoneList = () => {
 
   const handleView = async (zone) => {
     if (selectedZone === zone) {
-      setSelectedZone(null); // Hide details if the same zone is clicked
+      setSelectedZone(null); 
     } else {
       setSelectedZone(zone);
     }
     setMode('view');
   };
-
-  const handleEdit = async (zone) => {
+  const handleEdit = async ({ zone, onUpdateSuccess }) => {
     try {
       await fetchCities();
+  
       setSelectedZone(zone);
       setMode('edit');
+  
+      onUpdateSuccess();
     } catch (error) {
       console.error('Error fetching cities for editing:', error);
     }
+  };
+  
+
+  const onUpdateSuccess = async () => {
+    try {
+      await fetchZones();
+      console.log('Zone updated successfully!');
+    } catch (error) {
+      console.error('Error fetching updated zones:', error);
+    }
+    setSelectedZone(null);
+    setMode('view');
   };
 
   const handleDelete = async (zone) => {
@@ -96,7 +110,7 @@ const ZoneList = () => {
           <button onClick={() => handleView(zone)} className="view-button">
             View
           </button>
-          <button onClick={() => handleEdit(zone)} className="edit-button">
+          <button onClick={() => handleEdit(zone,onUpdateSuccess)} className="edit-button">
             Edit
           </button>
           <button onClick={() => handleDelete(zone)} className="delete-button">

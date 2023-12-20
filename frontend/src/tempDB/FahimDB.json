@@ -129,13 +129,87 @@
   ],
   "shops": [
     {
-      "shopID": "2",
-      "shopCategory": "Furniture",
-      "shopType": "Home Appliances",
+      "shopID": "ghjkl;lkjhj",
+      "shopCategory": "Pets",
+      "shopType": "Kitchen Appliances",
       "vacant": true,
       "bazar": "ghjk",
-      "size": "8*8",
+      "size": "8*9",
+      "id": 1
+    },
+    {
+      "shopID": "ghjkl;lkj",
+      "shopCategory": "Gifts",
+      "shopType": "Home Appliances",
+      "vacant": false,
+      "bazar": "gh",
+      "size": "9*9",
       "id": 2
     }
-  ]
+  ],
+  "users": [
+    {
+      "username": "jonathan",
+      "email": "jojo1@example.com",
+      "password": "hamon",
+      "phone": "1234567890",
+      "status": "inactive",
+      "userType": "Admin",
+      "id": 1
+    },
+    {
+      "username": "joeseph",
+      "email": "jojo2@example.com",
+      "password": "hermitspurple",
+      "phone": "0987654321",
+      "status": "active",
+      "userType": "ZoneManager",
+      "id": 2
+    },
+    {
+      "username": "jotaro",
+      "email": "jojo3@gmail.com",
+      "password": "starplatinum",
+      "phone": "000000000",
+      "userType": "SuperAdmin",
+      "id": 3
+    },
+    {
+      "username": "fa22-bcs-091@cuilahore.edu.pk",
+      "email": "texashouse003@gmail.com",
+      "password": "dxfgdfs",
+      "phone": "dfbvdf",
+      "status": "inactive",
+      "userType": "ZoneManager",
+      "id": 4
+    },
+    {
+      "username": "sdfdsg",
+      "email": "texashouse003@gmail.com",
+      "password": "dfgsd",
+      "phone": "dsfg",
+      "status": "inactive",
+      "userType": "Admin",
+      "id": 5
+    },
+    {
+      "username": "zdfbzd",
+      "email": "texashouse003@gmail.com",
+      "password": "cxvbxc",
+      "phone": "zdfzd",
+      "status": "inactive",
+      "userType": "ZoneManager",
+      "id": 6
+    },
+    {
+      "username": "abc",
+      "email": "abc@gmail.com",
+      "password": "abc",
+      "phone": "1234567890",
+      "status": "active",
+      "userType": "BazarManager",
+      "id": 7
+    }
+  ],
+  "bazars": [ ]
 }

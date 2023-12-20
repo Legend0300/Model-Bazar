@@ -14,7 +14,6 @@ const EditZone = ({ initialData, onUpdateSuccess }) => {
   const [cityList, setCityList] = useState([]);
 
   useEffect(() => {
-    // Fetch city data from an API endpoint
     const fetchCities = async () => {
       try {
         const response = await axios.get("http://localhost:8000/cities");
@@ -59,7 +58,6 @@ const EditZone = ({ initialData, onUpdateSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await axios.put(`http://localhost:8000/zones/${formData.id}`, formData);
       console.log("Zone updated successfully!");

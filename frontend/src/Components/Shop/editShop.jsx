@@ -1,146 +1,173 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
+import { useState,useEffect } from "react";
+import "./shop.css";
 
-const EditShop = (props) => {
-  const [shopID, setShopID] = useState("");
-  const [shopCategory, setShopCategory] = useState("");
-  const [shopType, setShopType] = useState("");
-  const [vacant, setVacant] = useState(true);
-  const [bazar, setBazar] = useState("");
-  const [size, setSize] = useState("");
-  const [shopCategories, setShopCategories] = useState([]);
-  const [shopTypes, setShopTypes] = useState([]);
+const EditShop = ({initialData, onUpdateSuccess}) => {
+  const [formData, setFormData] = useState({
+        id: initialData.id,
+        shopID: initialData.shopID,
+        shopCategory: initialData.shopCategory,
+        shopType: initialData.shopType,
+        vacant: initialData.vacant,
+        bazar: initialData.bazar,
+        size: initialData.size,
+    });
+    const [shopCategories, setShopCategories] = useState([]);
+    const [shopTypes, setShopTypes] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://localhost:8000/shopCategories")
-      .then(response => setShopCategories(response.data))
-      .catch(error => console.error(error));
+    useEffect(() => {
+        fetchShopCategories();
+        fetchShopTypes();
+    }
+    , []);
 
-    axios.get("http://localhost:8000/shopTypes")
-      .then(response => setShopTypes(response.data))
-      .catch(error => console.error(error));
+    const fetchShopCategories = async () => {
+        try {
+          console.log("http://localhost:8000/shopCategories");
+            const response = await axios.get("http://localhost:8000/shopCategories");
+            setShopCategories(response.data);
+        } catch (error) {
+            console.error("Error fetching shop categories:", error);
+        }
+    }
 
-    axios.get(`http://localhost:8000/shops/${props.match.params.id}`)
-      .then(response => {
-        setShopID(response.data.shopID);
-        setShopCategory(response.data.shopCategory);
-        setShopType(response.data.shopType);
-        setVacant(response.data.vacant);
-        setBazar(response.data.bazar);
-        setSize(response.data.size);
-      })
-      .catch(error => console.error(error));
-  }, [props.match.params.id]);
+    const fetchShopTypes = async () => {
+        try {
+          console.log("http://localhost:8000/shopTypes");
+            const response = await axios.get("http://localhost:8000/shopTypes");
+            setShopTypes(response.data);
+        } catch (error) {
+            console.error("Error fetching shop types:", error);
+        }
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.put(`http://localhost:8000/shops/${props.match.params.id}`, {
-      shopID,
-      shopCategory,
-      shopType,
-      vacant,
-      bazar,
-      size
-    })
-    .then(response => {
-      console.log(response.data);
-      props.history.push("/shops");
-    })
-    .catch(error => console.error(error));
-  };
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === "checkbox" ? checked : value,
+        });
+    }
+  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        if (!formData.id) {
+          console.error('Missing ID in formData');
+          return;
+        }
+      
+        axios
+          .put(`http://localhost:8000/shops/${formData.id}`, {
+            shopID: formData.shopID,
+            shopCategory: formData.shopCategory,
+            shopType: formData.shopType,
+            vacant: formData.vacant,
+            bazar: formData.bazar,
+            size: formData.size,
+            id: formData.id,
+          })
+          .then((response) => {
+            console.log(response.data);
+            onUpdateSuccess();
+          })
+          .catch((error) => console.error(error));
+      };
+      
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6 offset-md-3 card card-body mt-5">
-          <h3>Edit Shop</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="shopID">Shop ID</label>
-              <input
-                type="text"
-                id="shopID"
-                onChange={e => setShopID(e.target.value)}
-                value={shopID}
-                className="form-control"
-                placeholder="Enter shop ID"
-              />
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-md-6 offset-md-3 card card-body mt-5">
+                    <h3>Edit Shop</h3>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="shopID">Shop ID</label>
+                            <input
+                                type="text"
+                                id="shopID"
+                                name="shopID"
+                                className="form-control"
+                                value={formData.shopID}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="shopCategory">Shop Category</label>
+                            <select
+                                id="shopCategory"
+                                name="shopCategory"
+                                className="form-control"
+                                value={formData.shopCategory}
+                                onChange={handleChange}
+                            >
+                                <option value="">Select a shop category</option>
+                                {shopCategories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="shopType">Shop Type</label>
+                            <select
+                                id="shopType"
+                                name="shopType"
+                                className="form-control"
+                                value={formData.shopType}
+                                onChange={handleChange}
+                            >
+                                <option value="">Select a shop type</option>
+                                {shopTypes.map((type) => (
+                                    <option key={type.id} value={type.id}>
+                                        {type.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="vacant">Vacant</label>
+                            <input
+                                type="checkbox"
+                                id="vacant"
+                                name="vacant"
+                                className="form-control"
+                                checked={formData.vacant}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="bazar">Bazar</label>
+                            <input
+                                type="text"
+                                id="bazar"
+                                name="bazar"
+                                className="form-control"
+                                value={formData.bazar}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="size">Size</label>
+                            <input
+                                type="text"
+                                id="size"
+                                name="size"
+                                className="form-control"
+                                value={formData.size}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">
+                            Update Shop
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="shopCategory">Shop Category</label>
-              <select
-                id="shopCategory"
-                onChange={e => setShopCategory(e.target.value)}
-                value={shopCategory}
-                className="form-control"
-              >
-                <option value="">Select Shop Category</option>
-                {shopCategories.map(shopCategory => (
-                  <option key={shopCategory} value={shopCategory}>
-                    {shopCategory}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="shopType">Shop Type</label>
-              <select
-                id="shopType"
-                onChange={e => setShopType(e.target.value)}
-                value={shopType}
-                className="form-control"
-              >
-                <option value="">Select Shop Type</option>
-                {shopTypes.map(shopType => (
-                  <option key={shopType} value={shopType}>
-                    {shopType}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="vacant">Vacant</label>
-              <select
-                id="vacant"
-                onChange={e => setVacant(e.target.value)}
-                value={vacant}
-                className="form-control"
-              >
-                <option value="">Select Vacant</option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="bazar">Bazar</label>
-              <input
-                type="text"
-                id="bazar"
-                onChange={e => setBazar(e.target.value)}
-                value={bazar}
-                className="form-control"
-                placeholder="Enter Bazar"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="size">Size</label>
-              <input
-                type="text"
-                id="size"
-                onChange={e => setSize(e.target.value)}
-                value={size}
-                className="form-control"
-                placeholder="Enter Size"
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Update Shop
-            </button>
-          </form>
         </div>
-      </div>
-    </div>
-  );
-};
+    );
+}
 
 export default EditShop;

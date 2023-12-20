@@ -24,7 +24,6 @@ const EditCity = ({ city }) => {
         setSubmissionError(null);
     
         try {
-            // Use axios.put for updating an existing city
             await axios.put(`http://localhost:8000/cities/${city.id}`, formData);
             console.log('City edited successfully');
             setFormData({ name: '', district: '', province: '', prefix: '' });
