@@ -28,9 +28,9 @@ const shopSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    stallCategory: {
+    shopCategory: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'StallCategory',
+        ref: 'ShopCategory',
     },
     shopType: {
         type: String,
@@ -52,12 +52,13 @@ const shopSchema = new mongoose.Schema({
 });
 
 // Define models
-const StallCategory = mongoose.model('StallCategory', shopCategorySchema);
+const ShopCategory = mongoose.model('ShopCategory', shopCategorySchema);
 const ShopType = mongoose.model('ShopType', shopTypeSchema);
 const Shop = mongoose.model('Shop', shopSchema);
 
 module.exports = {
-    StallCategory,
+    ShopCategory,
     ShopType,
     Shop
 };
+ShopCategory

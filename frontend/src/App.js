@@ -1,9 +1,9 @@
 import React from 'react';
-import ListShopType from './Components/Shop/ShopType/listShopType';
+import ListShops from './Components/Shop/listShops';
 function App() {
   return (
     <div className="App">
-      <ListShopType />
+      <ListShops />
       </div>
   );
 }

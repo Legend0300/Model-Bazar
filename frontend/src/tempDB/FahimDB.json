@@ -126,5 +126,16 @@
       "name": "fsd",
       "id": 16
     }
+  ],
+  "shops": [
+    {
+      "shopID": "2",
+      "shopCategory": "Furniture",
+      "shopType": "Home Appliances",
+      "vacant": true,
+      "bazar": "ghjk",
+      "size": "8*8",
+      "id": 2
+    }
   ]
 }
