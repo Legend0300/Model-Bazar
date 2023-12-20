@@ -1,9 +1,9 @@
 import React from 'react';
-import CreateBazar from './Components/Bazar/createBazar';
+import ListShopType from './Components/Shop/ShopType/listShopType';
 function App() {
   return (
     <div className="App">
-      <CreateBazar />
+      <ListShopType />
       </div>
   );
 }

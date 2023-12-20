@@ -18,8 +18,7 @@ const shopTypeSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-});
-
+})
 // Define Income Category Schema
 
 // Define Shop Schema

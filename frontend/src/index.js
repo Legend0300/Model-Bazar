@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './tailwind.css';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateCity from './Components/City/createCity';

@@ -11,9 +11,9 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import "./createUserFormStyle.css";
+import "./editFormStyle.css";
 
-const EditUserForm = ({user}) => {
+const EditUserForm = ({user,handleEdit,handleUserChange}) => {
   const [formData, setFormData] = useState(user);
 
   const [errors, setErrors] = useState({});
@@ -77,11 +77,12 @@ const EditUserForm = ({user}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Validate the form before submitting
     if (validateForm()) {
       // Form data is valid, submit the form)
-      editUser(formData,formData.id);
+      editUser(formData);
+      handleUserChange(formData);
+      handleEdit();
     } else {
       console.log("Form contains errors. Please correct them.");
     }
@@ -185,10 +186,11 @@ const EditUserForm = ({user}) => {
             </option>
           </select>
         </div>
-
-        <button type="submit" className="button-style">
+        <div className="buttons">
+        <button type="submit" className="edit-button">
           update User
         </button>
+        </div>
       </form>
     </div>
   );
