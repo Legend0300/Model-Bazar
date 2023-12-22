@@ -10,6 +10,7 @@ const shopRoutes = require('./routes/shopRouters');
 const shopHolderRoutes = require('./routes/shopHolderRoutes');
 const ShopAllotmentRoutes = require('./routes/shopAllotmentRoutes');
 const FileRoutes = require('./routes/fileRoutes');
+const data = require('./routes/data');
 const errorHandler = require("./middleware/errorHandler");
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use('/shops', shopRoutes);
 app.use('/shop-holders', shopHolderRoutes);
 app.use('/shop-allotments', ShopAllotmentRoutes);
 app.use('/files', FileRoutes);
+app.use('/data', data);
 
 app.route('/').get((req, res) => {
   res.send('homepage of API');
