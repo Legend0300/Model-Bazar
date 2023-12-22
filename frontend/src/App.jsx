@@ -5,17 +5,17 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import NotFound from './Components/NotFound/index.js'
-import VoucherTable from './Components/Voucher/index.js'
-import Transactions from './Components/Transactions/index.js'
-import HomeDashboard from './HomeDashboard'
-import FileApp from './FileApp'
-import Report from './Report'
-import Allotment from './Allotment.jsx'
+import NotFound from './Components/NotFound/NotFound.jsx'
+import VoucherTable from './Components/Voucher/Voucher.jsx'
+import Transactions from './Components/Transactions/Transactions.jsx'
+import HomeDashboard from './Components/Dashboard/HomeDashboard.jsx'
+import FileApp from './Components/Files/FileApp.jsx'
+import Report from './Components/Reports/Report.jsx'
+import Allotment from './Components/Allotments/Allotment.jsx'
 
 // layouts
-import Nav from './layouts/Nav'
-import Login from './Components/Login/index.js'
+import Nav from './layouts/Nav.jsx'
+import Login from './Components/Login/Login.jsx'
 
 
 

@@ -7,7 +7,9 @@ export default function RootLayout() {
       <header className="bg-gray-800 text-white p-4 w-1/5">
         <nav className="space-y-2">
           <h1 className="text-2xl font-bold">Model Bazar System</h1>
-          <h2 className="text-lg" style={{marginTop : "10px"}}>Dashboard</h2>
+          <h2 className="text-lg" style={{ marginTop: "10px" }}>
+            Dashboard
+          </h2>
           <NavLink
             to="/"
             className="block text-blue-300 hover:text-white transition duration-300"
@@ -27,6 +29,27 @@ export default function RootLayout() {
             className="block text-blue-300 hover:text-white transition duration-300"
           >
             Setup
+          </NavLink>
+
+          <NavLink
+            to="users"
+            className="block text-blue-300 hover:text-white transition duration-300"
+          >
+            Users
+          </NavLink>
+
+          <NavLink
+            to="city"
+            className="block text-blue-300 hover:text-white transition duration-300"
+          >
+            City
+          </NavLink>
+
+          <NavLink
+            to="zone"
+            className="block text-blue-300 hover:text-white transition duration-300"
+          >
+            Zone
           </NavLink>
           <hr className="border-t border-gray-600 my-4" />
           <h2 className="text-lg">Transactions</h2>
@@ -59,15 +82,14 @@ export default function RootLayout() {
             Report
           </NavLink>
 
-            <hr className="border-t border-gray-600 my-4" />
-            <h2 className="text-lg">File Uploader</h2>
-            <NavLink
-                to="file-uploader"
-                className="block text-blue-300 hover:text-white transition duration-300"
-            >
-                File Uploader
-            </NavLink>
-            
+          <hr className="border-t border-gray-600 my-4" />
+          <h2 className="text-lg">File Uploader</h2>
+          <NavLink
+            to="file-uploader"
+            className="block text-blue-300 hover:text-white transition duration-300"
+          >
+            File Uploader
+          </NavLink>
         </nav>
       </header>
       <main className="flex-1 overflow-y-auto p-4">
