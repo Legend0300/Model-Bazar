@@ -12,7 +12,9 @@ import HomeDashboard from './Components/Dashboard/HomeDashboard.jsx'
 import FileApp from './Components/Files/FileApp.jsx'
 import Report from './Components/Reports/Report.jsx'
 import Allotment from './Components/Allotments/Allotment.jsx'
-
+import UserList from './Components/User/UserList.jsx'
+import CityList from './Components/City/CityList.jsx'
+import ZoneList from './Components/Zone/ZoneList.jsx'
 // layouts
 import Nav from './layouts/Nav.jsx'
 import Login from './Components/Login/Login.jsx'
@@ -30,6 +32,10 @@ const router = createBrowserRouter(
       <Route path="reports" element={<Report url={"http://localhost:3000/testdata"} />} />
       <Route path="files" element={<Report url={"http://localhost:3000/files"}/>}/>
       <Route path="allotment" element={<Allotment />} />
+      <Route path="users" element={<UserList />} />
+      <Route path="city" element={<CityList />} />
+      <Route path="zone" element={<ZoneList />} />
+
       {/* <Route index element={<Home />} />
     <Route path="about" element={<About />} />
     <Route path="help" element={<HelpLayout />}>

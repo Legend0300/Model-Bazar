@@ -237,7 +237,6 @@ const setBillPaidMiddleware = (req, res, next) => {
 
 // Middleware to set billpaid to false after 15 seconds
 const setBillPaidFalseMiddleware = (req, res, next) => {
-  console.log("Setting billpaid to false for all users after 15 seconds");
   users.forEach((user) => {
     user.billpaid = false;
   });
@@ -246,7 +245,6 @@ const setBillPaidFalseMiddleware = (req, res, next) => {
 
 // Middleware to set all users to null after 1 minute
 const setAllUsersNullMiddleware = (req, res, next) => {
-  console.log("Setting all users to null after 1 minute");
   users.length = 0; // This will clear the users array
   next();
 };
