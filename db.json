@@ -149,24 +149,6 @@
   ],
   "users": [
     {
-      "username": "jonathan",
-      "email": "jojo1@example.com",
-      "password": "hamon",
-      "phone": "1234567890",
-      "status": "inactive",
-      "userType": "Admin",
-      "id": 1
-    },
-    {
-      "username": "joeseph",
-      "email": "jojo2@example.com",
-      "password": "hermitspurple",
-      "phone": "0987654321",
-      "status": "active",
-      "userType": "ZoneManager",
-      "id": 2
-    },
-    {
       "username": "jotaro",
       "email": "jojo3@gmail.com",
       "password": "starplatinum",
